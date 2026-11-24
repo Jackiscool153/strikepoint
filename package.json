@@ -1,0 +1,23 @@
+{
+  "name": "strikepoint",
+  "version": "1.0.0",
+  "description": "Browser FPS with online lobby, loadouts and bots",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/online-test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "three": "^0.160.0",
+    "ws": "^8.23.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

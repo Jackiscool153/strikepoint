@@ -1,0 +1,105 @@
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:#111;font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#eee;user-select:none}
+#view{position:fixed;inset:0;width:100%;height:100%;display:block}
+.hidden{display:none!important}
+.screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,rgba(10,14,18,.35),rgba(5,7,10,.85))}
+.panel{background:rgba(14,18,24,.88);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:22px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.menu-panel{width:440px;display:flex;flex-direction:column;gap:12px;text-align:center}
+.logo{font-size:54px;letter-spacing:6px;margin:0;font-weight:900;color:#fff}
+.logo span{color:#ff9f1c}
+.tag{margin:-6px 0 8px;color:#9aa;letter-spacing:2px;text-transform:uppercase;font-size:12px}
+label{display:flex;flex-direction:column;text-align:left;font-size:12px;color:#aab;gap:4px;text-transform:uppercase;letter-spacing:1px}
+input{background:#0b0e12;border:1px solid #334;color:#fff;padding:10px;border-radius:6px;font-size:16px}
+button{background:#2a3340;color:#eee;border:1px solid #445;border-radius:6px;padding:8px 12px;font-size:14px;cursor:pointer;font-weight:600}
+button:hover{background:#3a4555}
+button.big{padding:14px;font-size:17px;letter-spacing:2px;background:#ff9f1c;color:#111;border:none}
+button.big:hover{background:#ffb347}
+button.alt{background:#1f6f8b;border:none;color:#fff}
+button.alt:hover{background:#2a8bad}
+button.ghost{background:transparent}
+button.ready.on{background:#3ecf6a}
+.msg{color:#ff6b6b;min-height:18px;font-size:13px}
+.small{font-size:12px;color:#99a;line-height:1.5}
+.lobby-wrap{display:flex;gap:18px;width:min(1180px,96vw);max-height:92vh}
+.loadout{flex:1.6;display:flex;flex-direction:column;gap:14px;overflow:auto}
+.lobby-side{flex:1;display:flex;flex-direction:column;gap:10px;min-width:320px;overflow:auto}
+h2{margin:0;font-size:20px;letter-spacing:3px}
+h2 .sub{font-size:12px;color:#889;letter-spacing:0;font-weight:400;margin-left:8px}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.slot{background:#1a212b;border:2px solid #2c3644;border-radius:8px;padding:10px;cursor:pointer;position:relative;min-height:84px}
+.slot.sel{border-color:#ff9f1c;background:#262016}
+.slot .key{position:absolute;top:6px;right:8px;font-size:22px;font-weight:900;color:#ff9f1c55}
+.slot .lbl{font-size:11px;text-transform:uppercase;color:#889;letter-spacing:1px}
+.slot .wn{font-size:15px;font-weight:700;margin-top:6px}
+.slot .wt{font-size:11px;color:#9ab}
+.options{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.opt{background:#161c24;border:2px solid #2a3340;border-radius:8px;padding:12px;cursor:pointer}
+.opt:hover{border-color:#556}
+.opt.sel{border-color:#3ecf6a;background:#15241a}
+.opt .wn{font-size:16px;font-weight:700}
+.opt .wt{font-size:11px;color:#9ab;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+.stat{display:flex;align-items:center;gap:8px;font-size:12px;margin:3px 0}
+.stat span{width:70px;color:#aab}
+.stat .bar{flex:1;height:7px;background:#0b0e12;border-radius:4px;overflow:hidden}
+.stat .bar i{display:block;height:100%;background:linear-gradient(90deg,#ff9f1c,#ffd166)}
+.stat b{width:58px;text-align:right;font-weight:600}
+.status{font-size:14px;color:#ffd166;min-height:20px}
+.host-controls .row{display:flex;align-items:center;gap:8px;margin:4px 0}
+.host-controls .row span{width:48px;font-size:12px;color:#aab;text-transform:uppercase}
+.mode-btn.on{background:#ff9f1c;color:#111}
+.players{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;flex:1;min-height:120px}
+.players li{display:flex;align-items:center;gap:8px;background:#1a212b;padding:8px 10px;border-radius:6px;font-size:14px}
+.players li .nm{flex:1;font-weight:600}
+.players li .badge{font-size:10px;padding:2px 6px;border-radius:4px;background:#334;color:#ccd}
+.players li .badge.host{background:#ff9f1c;color:#111}
+.players li .badge.t0{background:#2b6cb0}.players li .badge.t1{background:#c53030}
+.players li .rd{font-size:11px;font-weight:700;padding:3px 8px;border-radius:4px;background:#3a2222;color:#f88}
+.players li .rd.y{background:#1d3a26;color:#6f6}
+.players li.me{outline:1px solid #ff9f1c88}
+#hud{position:fixed;inset:0;pointer-events:none}
+#crosshair{position:absolute;left:50%;top:50%;width:0;height:0}
+#crosshair i{position:absolute;background:#fff;box-shadow:0 0 2px #000}
+#crosshair .t,#crosshair .b{width:2px;height:8px;left:-1px}
+#crosshair .l,#crosshair .r{height:2px;width:8px;top:-1px}
+#hitmarker{position:absolute;left:50%;top:50%;width:0;height:0;opacity:0;transition:opacity .08s}
+#hitmarker i{position:absolute;width:2px;height:9px;left:-1px;top:-4px;background:#fff;box-shadow:0 0 2px #000}
+#hitmarker i:nth-child(1){transform:rotate(45deg) translateY(-11px)}#hitmarker i:nth-child(2){transform:rotate(135deg) translateY(-11px)}
+#hitmarker i:nth-child(3){transform:rotate(225deg) translateY(-11px)}#hitmarker i:nth-child(4){transform:rotate(315deg) translateY(-11px)}
+#hitmarker.head i{background:#ffd166}#hitmarker.kill i{background:#ff3b3b;height:13px}
+#scope{position:absolute;inset:0;background:radial-gradient(circle at center,transparent 0,transparent 32vh,#000 32.3vh)}
+#scope::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:#000}
+#scope::after{content:"";position:absolute;top:50%;left:0;right:0;height:1px;background:#000}
+#vignette{position:absolute;inset:0;opacity:0;background:radial-gradient(ellipse at center,transparent 45%,rgba(200,0,0,.75));transition:opacity .15s}
+#topbar{position:absolute;top:12px;left:50%;transform:translateX(-50%);display:flex;gap:14px;align-items:center;font-weight:800;font-size:18px}
+#topbar span{background:rgba(0,0,0,.5);padding:6px 14px;border-radius:6px}
+#score-a{color:#7ab8ff}#score-b{color:#ff7a7a}
+#killfeed{position:absolute;top:14px;right:16px;display:flex;flex-direction:column;gap:4px;align-items:flex-end;font-size:14px}
+#killfeed div{background:rgba(0,0,0,.55);padding:4px 10px;border-radius:4px}
+#killfeed .w{color:#ffd166;margin:0 6px;font-size:12px}
+#killfeed .me{color:#ff9f1c;font-weight:700}
+#popup{position:absolute;top:58%;left:50%;transform:translateX(-50%);font-weight:800;font-size:20px;color:#ffd166;text-shadow:0 2px 4px #000;text-align:center}
+#health{position:absolute;left:24px;bottom:24px;display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px}
+#hp-bar{width:220px;height:14px;background:rgba(0,0,0,.6);border-radius:7px;overflow:hidden;border:1px solid #fff3}
+#hp-fill{height:100%;width:100%;background:linear-gradient(90deg,#3ecf6a,#9fef6a);transition:width .15s}
+#ammo{position:absolute;right:28px;bottom:92px;text-align:right;font-size:20px;text-shadow:0 2px 3px #000}
+#ammo b{font-size:40px}
+#weapon-name{font-size:13px;color:#ccd;letter-spacing:1px;text-transform:uppercase}
+#reload-hint{font-size:14px;color:#ff6b6b;font-weight:700}
+#hotbar{position:absolute;right:24px;bottom:22px;display:flex;gap:6px}
+#hotbar .hb{width:118px;height:58px;background:rgba(0,0,0,.5);border:2px solid #fff2;border-radius:6px;padding:4px 6px;font-size:11px;position:relative}
+#hotbar .hb.sel{border-color:#ff9f1c;background:rgba(60,40,10,.65)}
+#hotbar .hb .k{position:absolute;top:2px;right:6px;font-weight:900;color:#ff9f1c;font-size:14px}
+#hotbar .hb .n{margin-top:16px;font-weight:700;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#hotbar .hb .c{color:#aab}
+#death{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(80,0,0,.35)}
+#death h2{font-size:30px}
+#scoreboard{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);min-width:520px}
+table{border-collapse:collapse;width:100%}
+td,th{padding:6px 10px;text-align:left;font-size:14px}
+th{color:#99a;font-size:11px;text-transform:uppercase;border-bottom:1px solid #334}
+tr.me td{color:#ff9f1c;font-weight:700}
+tr.t0 td:first-child{border-left:3px solid #2b6cb0}tr.t1 td:first-child{border-left:3px solid #c53030}
+#pause,#clicktoplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45);pointer-events:auto;text-align:center}
+#clicktoplay{cursor:pointer}
+#endscreen .panel{min-width:520px;text-align:center}
+#countdown{position:fixed;top:30%;left:50%;transform:translateX(-50%);font-size:110px;font-weight:900;color:#ff9f1c;text-shadow:0 4px 20px #000;pointer-events:none}
